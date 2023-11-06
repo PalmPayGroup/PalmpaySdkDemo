@@ -39,4 +39,17 @@ public class Demo {
 
         Assert.assertTrue(result);
     }
+
+    /**
+     * 测试callback回调接口验签
+     * @throws Exception
+     */
+    @Test
+    public void testCallbackVerify() throws Exception {
+        String paramBody = "{\"orderId\":\"P23101802543812274\",\"orderNo\":\"2424231018025438544222\",\"appId\":\"L10378191362\",\"transType\":\"24\",\"orderType\":\"01\",\"amount\":999,\"couponAmount\":0,\"status\":1,\"completeTime\":1697597698516,\"orderStatus\":2,\"sign\":\"Dj9ycTD91W9ti4n%2FK6GbtVu2qNDE83tB6C7ToKrVe9tSM2aIhMrk%2Fqy9CgQ9fwXJhH6QQ1kg8kx2AV7O4tOIpSXs%2BnZ7aHXjricn8pUx06yQ%2BIqBXWSY9Hrhb6qkPXAzcskQ1MI%2B7SOieBVJTMf4vxIoxLOhMSYHeQB5jyfgZBA%3D\"}";
+        //测试环境palmpay公钥
+        String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCVT+pLc1nkz9z803SOmF48bMFn0GYF4ng6nxj0ojUeu4KeNKkkw/nfureTtL77j9RpMjquJzzKdOZfHRvQyuAbaLoaSD1uU47npNiAL05bLYZEoZWvFOar9gNbIesea8MX0DeYncA2Tkr3kUo8K6XBrZ+TcV2Q8NEvm1T536LOGwIDAQAB";
+        boolean res = PalmPayUtil.verifySignForCallback(paramBody,publicKey,SignType.RSA);
+        Assert.assertTrue(res);
+    }
 }
