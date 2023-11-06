@@ -125,7 +125,7 @@ public class PalmPayUtil {
      * @return
      * @throws Exception
      */
-    private static boolean verifySignature(final Map<String, String> data,String publicKey,String sign,SignType signType) throws Exception{
+    public static boolean verifySignature(final Map<String, String> data,String publicKey,String sign,SignType signType) throws Exception{
     	String encryData = sortStr(data);
     	if(SignType.RSA.equals(signType)){
     		return RsaUtil.verify(encryData, publicKey, sign);
@@ -140,8 +140,8 @@ public class PalmPayUtil {
         Arrays.sort(keyArray);
         StringBuilder sb = new StringBuilder();
         for (String k : keyArray) {
-            if (data.get(k).trim().length() > 0) // 参数值为空，则不参与签名
-                sb.append(k).append("=").append(data.get(k).trim()).append("&");
+            if (String.valueOf(data.get(k)).trim().length() > 0) // 参数值为空，则不参与签名
+                sb.append(k).append("=").append(String.valueOf(data.get(k)).trim()).append("&");
         }
        return Md5Util.MD5(sb.substring(0, sb.length()-1));
     }
